@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.student.dao.UserDao">
+    <select id="getAllPerson" resultType="com.student.entity.Person1" parameterType="java.lang.Integer">
+        select *  from xzyuan
+    </select>
+
+    <select id="queryPersonById" resultType="com.student.entity.Person1" parameterType="java.lang.Integer">
+        select * from xzyuan where id = #{id}
+    </select>
+    <insert id="addPerson"  parameterType="person1">
+        insert into xzyuan (name,qq,type,entranceTime,school,onlineNum,dailylink,wish,bro,create_at,update_at)
+        value (#{name},#{qq},#{type},#{entranceTime},#{school},
+        #{onlineNum},#{dailylink},#{wish},#{bro},#{create_at},#{update_at})
+        <selectKey resultType="java.lang.Integer" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+    </insert>
+    <update id="updatePerson">
+        update xzyuan set name=#{name},create_at=#{create_at},update_at=#{update_at},
+        qq=#{qq},type=#{type},entranceTime=#{entranceTime},
+        school=#{school},onlineNum=#{onlineNum},dailylink=#{dailylink},wish=#{wish},bro=#{bro} where id=#{id}
+    </update>
+    <delete id="deletePerson">
+        delete from xzyuan where id=#{id}
+    </delete>
+
+
+</mapper>
